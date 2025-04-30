@@ -29,17 +29,14 @@ public class JWTUtils {
                 .setIssuedAt(new Date())
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
-
     }
 
-    public void validateToken(JWTDescription description, String issuer, String token) {
-        Map<String, Object> claimsMap = claimBuilder(description);
+    public Claims getTokenClaims(String issuer, String token) {
+        // Map<String, Object> claimsMap = claimBuilder(description);
         Key key = StringToKeyConverter(JWTSecretKey);
-        Claims claims = Jwts.parser()
+        return Jwts.parser()
                 .setSigningKey(key)
                 .parseClaimsJws(token).getBody();
-        System.out.println("helloadfasdf");
-        System.out.println(claims);
 
     }
 
